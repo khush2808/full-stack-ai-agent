@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import  {inngest}  from "../inngest/client";
-import User from "../models/user";
+import { inngest } from "../inngest/client.js";
+import User from "../models/user.js";
 export const signup = async (req, res) => {
   const { email, skills = [], password } = req.body;
   try {
@@ -59,25 +59,29 @@ export const logout = async (req, res) => {
 };
 export const updateUser = async (req, res) => {
   const { skills = [], role, email } = req.body;
-  try{
-    if(req.user?.role!== "admin"){
-        return res.status(403).json({error:"Forbidden"});
+  try {
+    if (req.user?.role !== "admin") {
+      return res.status(403).json({ error: "Forbidden" });
     }
-    const user = await User.findOneAndUpdate({email},{$set:{skills,role}},{new:true});
-    if(!user)return res.status(404).json({error:"User not found"});
-    res.status(200).json({user});
-  }catch(error){
-    res.status(500).json({error:error.message});
+    const user = await User.findOneAndUpdate(
+      { email },
+      { $set: { skills, role } },
+      { new: true }
+    );
+    if (!user) return res.status(404).json({ error: "User not found" });
+    res.status(200).json({ user });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
-export const getUsers = async (req,res)=>{
-    try{
-        if(req.user?.role!== "admin"){
-            return res.status(403).json({error:"Forbidden"});
-        }
-        const users = await User.find();
-        res.status(200).json({users});
-    }catch(error){
-        res.status(500).json({error:error.message});
+export const getUsers = async (req, res) => {
+  try {
+    if (req.user?.role !== "admin") {
+      return res.status(403).json({ error: "Forbidden" });
     }
-}
+    const users = await User.find();
+    res.status(200).json({ users });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
