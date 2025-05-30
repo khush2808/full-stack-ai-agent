@@ -5,7 +5,7 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "dev": "nodemon index.js"
     },
     "keywords": [],
     "author": "",
@@ -19,6 +19,7 @@
         "inngest": "^3.38.0",
         "jsonwebtoken": "^9.0.2",
         "mongoose": "^8.15.1",
-        "nodemailer": "^7.0.3"
+        "nodemailer": "^7.0.3",
+        "nodemon": "^3.1.10"
     }
 }
