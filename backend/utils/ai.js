@@ -1,6 +1,7 @@
+// Library imports
 import { createAgent, gemini } from "@inngest/agent-kit";
 
-const analyzeTicket = async (ticket) => {
+export const analyzeTicket = async (ticket) => {
   const supportAgent = createAgent({
     model: gemini({
       model: "gemini-1.5-flash-8b",
@@ -61,4 +62,3 @@ Ticket information:
   }
 };
 
-export default analyzeTicket;

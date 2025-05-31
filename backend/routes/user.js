@@ -1,4 +1,7 @@
+// Library imports
 import express from "express";
+
+// File imports
 import {
   getUsers,
   login,
@@ -6,8 +9,8 @@ import {
   updateUser,
   logout,
 } from "../controllers/user.js";
-
 import { authenticate } from "../middlewares/auth.js";
+
 const router = express.Router();
 
 router.post("/update-user", authenticate, updateUser);

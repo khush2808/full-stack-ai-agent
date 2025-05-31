@@ -1,7 +1,11 @@
+// Library imports
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+
+// File imports
 import { inngest } from "../inngest/client.js";
 import User from "../models/user.js";
+
 export const signup = async (req, res) => {
   const { email, skills = [], password } = req.body;
   try {
@@ -57,6 +61,7 @@ export const logout = async (req, res) => {
     console.log(error);
   }
 };
+
 export const updateUser = async (req, res) => {
   const { skills = [], role, email } = req.body;
   try {
@@ -74,6 +79,7 @@ export const updateUser = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
 export const getUsers = async (req, res) => {
   try {
     if (req.user?.role !== "admin") {

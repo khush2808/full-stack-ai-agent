@@ -1,8 +1,13 @@
+// Library imports
 import { NonRetriableError } from "inngest";
-import { analyzeTicket } from "@/utils/ai.js";
-import { sendMail } from "@/utils/mail.js";
+
+// File imports
+import { analyzeTicket } from "../../utils/ai.js";
+import { sendMail } from "../../utils/mailer.js";
 import Ticket from "../../models/ticket.js";
-const onTicketCreated = inngest.createFunction(
+import { inngest } from "../client.js";
+import User from "../../models/user.js";
+export const onTicketCreated = inngest.createFunction(
   { id: "on-ticket-created", retries: 2 },
   { event: "ticket/created" },
   async ({ event, step }) => {
@@ -42,7 +47,7 @@ const onTicketCreated = inngest.createFunction(
           role: "moderator",
           skills: {
             $elemMatch: {
-              $regex: relatedskills.join("|"),
+              $regex: relatedSkills.join("|"),
               $options: "i",
             },
           },
